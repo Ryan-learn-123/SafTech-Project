@@ -94,3 +94,7 @@ h6 {
 footer {
   width: 100%;
 }
+
+body {
+    overflow-x: hidden;
+}
