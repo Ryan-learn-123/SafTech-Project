@@ -78,12 +78,11 @@ const AddProducts = () => {
             </div> <br /> <br />
         
      </div> <br />
-     <hr />
-     <hr />
-     <hr />
-     <hr />
-     
-     <hr /><br /><br /><br /> <br /><br />
+     <br /><br /><br /> <br /><br />
+     <br />
+     <br />
+     <br /><br />
+     <br /><br />
 
      <Carousel/> 
      <Footer/>

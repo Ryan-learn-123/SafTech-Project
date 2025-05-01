@@ -35,10 +35,7 @@ const SingleProduct = () => {
         <div className="container-fluid getproducts-background">
             <div className="row justify-content-center mt-3 ">
             <nav className="m-4">
-                <Link to = "/"className="btn btn-dark mx-2">Home</Link>
-                <Link to = "/addproducts"className="btn btn-dark mx-2">Add Product</Link>
-                <Link to = "/signin"className="btn btn-dark mx-2">Sign In</Link>
-                <Link to = "/signup"className="btn btn-dark mx-2">Sign Up</Link>
+                <Link to = "/"className="btn btn-dark mx-2">Back To Home</Link>
 
             </nav>
             <div className="col-md-3 card shadow">
@@ -58,8 +55,9 @@ const SingleProduct = () => {
                     <input type="number" readOnly  value = {product.product_cost} className = "form-control" /> <br />
 
                     <input type="tel" required placeholder="Enter Mpesa No 254XXXXXXX" onChange={(e) => setPhone(e.target.value)} className="form-control" /> <br />
-                    <button className="btn btn-primary">Pay Now</button> <br /> <br />
+                    <button className="btn btn-success">Pay Now</button> <br /> <br />
                 </form>
+                
             </div>
         </div>
         </div>

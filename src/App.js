@@ -8,6 +8,7 @@ import SignIn from './Components/SignIn';
 import AddProducts from './Components/AddProducts';
 import GetProducts from './Components/GetProducts';
 import SingleProduct from './Components/SingleProduct';
+import Chatbot from './Components/Chatbot';
 // import Products from './Components/Products';
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/addproducts" element={<AddProducts/>}/>
           <Route path="/" element={<GetProducts/>}/>
           <Route path="/singleproduct" element={<SingleProduct/>}/>
+          <Route path="/chatbot" element={<Chatbot/>}/>
           {/* <Route path="/products" element={<Products/>}/> */}
         </Routes>
      </div>

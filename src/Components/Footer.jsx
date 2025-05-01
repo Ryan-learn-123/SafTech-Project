@@ -14,7 +14,7 @@ const Footer = () => {
                  <h4 class="text-center">Contact Us</h4>
                  <form action="">
                      <input type="email" placeholder="Enter Email" class="form-control"/><br/>
-                     <textarea placeholder="Leave a comment" rows="7" class="form-control"></textarea><br/>
+                     <textarea placeholder="Please leave a message" rows="7" class="form-control"></textarea><br/>
                      <br/>
                      <input type="submit" value="Send Message" class="btn btn-outline-dark"/><br/><br/>
                  </form><br /><br />
@@ -36,12 +36,12 @@ const Footer = () => {
                      <img src="images/fb.png" alt="" width="50px" height = "50px"/>
                  </Link >
 
-                 <Link to="https://web.whatsapp.com/send?phone=254776047229">
-                     <img src="images/200.webp" alt="" width="50px" height = "50px"/>
+                 <Link to="https://www.linkedin.com/">
+                     <img src="images/linkedin.png" alt="" width="50px" height = "50px"/>
                  </Link >
                  <br/><br/>
                  
-                 <button className="btn btn-dark text-white " ><Link to="/">SafShop SHOP</Link ></button>   <br /> <br />           
+                 <button className="btn btn-dark text-white " ><Link to="/">SafTech SHOP</Link ></button>   <br /> <br />           
              </div><br /><br />
              <br /><br />
             
@@ -51,10 +51,7 @@ const Footer = () => {
         <footer class="bg-dark text-white text-center p-2">
              <h5>Developed by Ryantech&copy;2025. All rights reserved</h5>
         </footer>     
-
-          
         </div>
-    //    </div>
      );
 }
  

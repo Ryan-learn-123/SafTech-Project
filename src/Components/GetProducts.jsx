@@ -52,6 +52,7 @@ const GetProducts = () => {
                     <Link to = "/addproducts"className="btn btn-dark mx-2">Add Product</Link>
                     <Link to = "/signin"className="btn btn-dark mx-2">Sign In</Link>
                     <Link to = "/signup"className="btn btn-dark mx-2">Sign Up</Link>
+                    <Link to = "/chatbot"className="btn btn-dark mx-2">ChatBot</Link>
                     
 
                 </nav>
