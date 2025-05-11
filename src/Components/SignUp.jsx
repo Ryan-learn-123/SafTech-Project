@@ -1,96 +1,201 @@
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import Footer from "./Footer";
-import Navbar from "./Navbar";
+import { useNavigate, Link } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
 
-    let [username, setUsername] = useState("");
-    let [email, setEmail] = useState("");
-    let [phone, setPhone] = useState("");
-    let [password, setPassword] = useState("");
-    let [loading, setLoading] = useState("");
-    let [success, setSuccess] = useState("");
-    let [error, setError] = useState("");
+  const [loading, setLoading] = useState("");
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showSuggestion, setShowSuggestion] = useState(false);
 
-    // const togglePassword = () => {
-    //     const pdinput = document.getElementById("password");
-    //     let type = pdinput.getAttribute("type");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    if (name === "password") {
+      validatePassword(value);
+    }
+  };
+
+  const validatePassword = (password) => {
+    let strength = "Strong password";
+    let error = "";
+
+    if (password.length < 5) {
+      strength = "Weak: Minimum 5 characters";
+      error = "Too short";
+    } else if (!/\d/.test(password)) {
+      strength = "Weak: Must contain a number";
+      error = "No number";
+    } else if (!/[A-Z]/.test(password)) {
+      strength = "Weak: Must contain uppercase";
+      error = "No uppercase";
+    } else if (!/[a-z]/.test(password)) {
+      strength = "Weak: Must contain lowercase";
+      error = "No lowercase";
+    } else if (!/[!@#$%^&*]/.test(password)) {
+      strength = "Weak: Add special character";
+      error = "No special char";
+    }
+
+    setPasswordStrength(strength);
+    setPasswordError(error);
+  };
+
+  const generatePassword = () => {
+    const generated = "S@f3P@ssW0rd#2025";
+    setFormData(prev => ({ ...prev, password: generated }));
+    setShowSuggestion(true);
+    setPasswordStrength("Strong password");
+    setPasswordError("");
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    setLoading("Submitting...");
+    setError("");
+
+    try {
+      const response = await axios.post("https://ryan2025.pythonanywhere.com/api/signup", {
+        username: formData.username,
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
+      });
+
+      if (response.data.success) {
+        setSuccess(response.data.success);
+        localStorage.setItem("user", JSON.stringify(formData));
+        navigate("/"); // Redirect
+      } else {
+        setError(response.data.error || "Unexpected error, please try again.");
+      }
+    } catch (err) {
+      setError("Signup failed. Try again.");
+    } finally {
+      setLoading("");
+    }
+  };
+
+  return (
     
-    //     if (type === "password") {
-    //       type = "text";
-    //     } else {
-    //       type = "password";
-    //     }
-    
-    //     pdinput.setAttribute("type", type);
-    //   };
+    <div className="hero-banner">
+      <div className="container-fluid">
+      <div className="bg getproducts-background">
+        <div className="row justify-content-center mt-4">
+          <nav className="m-4">
+            <Link to="/" className="btn btn-dark mx-2">Home</Link>
+          </nav>
 
-    const submitForm = async (e) => {
-        e.preventDefault();
-        try {
-            setLoading("Please wait as we submit your data");
-            setSuccess("");
-            setError("");
-            const data = new FormData();
-            data.append("username", username);
-            data.append("email", email);
-            data.append("phone", phone);
-            data.append("password", password);
-          
+          <div className="col-md-6 card shadow p-4">
+            <h2>Sign Up</h2>
+            {loading && <b className="text-warning">{loading}</b>}
+            {success && <b className="text-success">{success}</b>}
+            {error && <b className="text-danger">{error}</b>}
 
-            const response = await axios.post("https://ryan2025.pythonanywhere.com/api/signup", data);
+            <form onSubmit={submitForm} autoComplete="on">
+              <input
+                type="text"
+                name="username"
+                placeholder="Enter Name"
+                required
+                className="form-control"
+                autoComplete="username"
+                value={formData.username}
+                onChange={handleChange}
+              /><br />
 
-            console.log(response)
-            setLoading("");
-            setSuccess(response.data.success);
-            setUsername("");
-            setEmail("");
-            setPhone("");
-            setPassword("");
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                required
+                className="form-control"
+                autoComplete="email"
+                value={formData.email}
+                onChange={handleChange}
+              /><br />
 
-        } catch (error) {
-           setLoading("");
-           setError("Something went wrong. Please try again"); 
-        }
-    };
-    return ( 
-       <div className="container-fluid">
-        {/* <Navbar/> */}
-         <div className="bg getproducts-background">
-            <div className="row justify-content-center mt-4">
-                <div className="col-md-6 card shadow p-4">
-                    <h2>Sign Up</h2>
-                    <b className="text-warning">{loading}</b>
-                    <b className="text-success">{success}</b>
-                    <b className="text-danger">{error}</b>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Enter Phone No."
+                required
+                className="form-control"
+                autoComplete="tel"
+                value={formData.phone}
+                onChange={handleChange}
+              /><br />
 
-                    <form onSubmit={submitForm}>
-                        <input type="text" placeholder="Enter Name" required value={username} className="form-control" onChange={(e) => setUsername(e.target.value)} /> <br />
+              <div className="input-group">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter Password"
+                  required
+                  className="form-control"
+                  autoComplete="new-password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <button type="button" className="btn btn-outline-secondary" onClick={toggleShowPassword}>
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+              <small className={`form-text ${passwordError ? "text-danger" : "text-success"}`}>
+                {passwordStrength}
+              </small>
 
-                        <input type="email" placeholder="Enter Email" required value={email} className="form-control" onChange={(e) => setEmail(e.target.value)} /> <br />
+              {showSuggestion && (
+                <div className="alert alert-info mt-2">
+                  <strong>Suggested password:</strong> <code>{formData.password}</code><br />
+                  This password will be offered to save by your browser.
+                </div>
+              )}
 
-                        <input type="tel" placeholder="Enter Phone No." required value={phone} className="form-control" onChange={(e) => setPhone(e.target.value)} /> <br />
+              <button
+                type="button"
+                className="btn btn-light my-3"
+                onClick={generatePassword}
+              >
+                Suggest a Strong Password
+              </button>
 
-                        <input type="password" placeholder="Enter Password" required value={password} className="form-control" onChange={(e) => setPassword(e.target.value)} /> <br />
+              <br />
 
-                        {/* <span className="input-group-text" onClick={togglePassword}>
-                          <i className="bi bi-eye-slash"></i>
-                        </span> */}
-                        <button type="submit" className="btn btn-dark">Sign Up</button>
-                    </form> 
-                    
-                </div> <br /> <br />
-                <br /> <br />
-                <br />
-                <br />
-                <br /><br />
-                <br /><br />
-                <Footer/>
-            </div>
+              <button
+                type="submit"
+                className="btn btn-dark"
+                disabled={passwordError}
+              >
+                Sign Up
+              </button>
+            </form>
+            <p className="mt-3">Already have an account? <Link to="/signin">Sign In</Link></p>
+          </div>
+
+          <Footer />
         </div>
-       </div>
-     );
-}
- 
+      </div>
+    </div>
+    </div>
+  );
+};
+
 export default SignUp;
