@@ -281,7 +281,9 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="container-fluid">
+   
+    <div className="hero-banner">
+       <div className="container-fluid">
       <div className="bg getproducts-background">
         <div className="row justify-content-center mt-4">
           <nav className="m-4">
@@ -372,6 +374,7 @@ const ChangePassword = () => {
         </div>
       </div>
       <Footer />
+    </div>
     </div>
   );
 };

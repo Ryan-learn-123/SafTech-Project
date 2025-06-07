@@ -62,7 +62,9 @@ const CategoryProducts = () => {
     };
 
     return (
-        <div className="container-fluid">
+        
+        <div className="hero-banner">
+            <div className="container-fluid">
             <div className="row getproducts-background">
                 <div className="p-3" style={{ backgroundColor: "black" }}>
                     <h3 style={{ color: "limegreen" }}>{categoryName} Products</h3>
@@ -104,8 +106,9 @@ const CategoryProducts = () => {
                     ))}
                 </div>
 
-                <Footer />
+                <Footer/>
             </div>
+        </div>
         </div>
     );
 };
