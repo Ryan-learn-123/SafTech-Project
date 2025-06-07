@@ -62,9 +62,13 @@ const CategoryProducts = () => {
     };
 
     return (
+<<<<<<< HEAD
         
         <div className="hero-banner">
             <div className="container-fluid">
+=======
+        <div className="container-fluid">
+>>>>>>> 0e775e5dc7f1ee77a23d61b9c1639e83814333cb
             <div className="row getproducts-background">
                 <div className="p-3" style={{ backgroundColor: "black" }}>
                     <h3 style={{ color: "limegreen" }}>{categoryName} Products</h3>
@@ -106,10 +110,16 @@ const CategoryProducts = () => {
                     ))}
                 </div>
 
+<<<<<<< HEAD
                 <Footer/>
             </div>
         </div>
         </div>
+=======
+                <Footer />
+            </div>
+        </div>
+>>>>>>> 0e775e5dc7f1ee77a23d61b9c1639e83814333cb
     );
 };
 

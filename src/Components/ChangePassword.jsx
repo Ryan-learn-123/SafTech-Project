@@ -281,9 +281,13 @@ const ChangePassword = () => {
   };
 
   return (
+<<<<<<< HEAD
    
     <div className="hero-banner">
        <div className="container-fluid">
+=======
+    <div className="container-fluid">
+>>>>>>> 0e775e5dc7f1ee77a23d61b9c1639e83814333cb
       <div className="bg getproducts-background">
         <div className="row justify-content-center mt-4">
           <nav className="m-4">
@@ -375,7 +379,10 @@ const ChangePassword = () => {
       </div>
       <Footer />
     </div>
+<<<<<<< HEAD
     </div>
+=======
+>>>>>>> 0e775e5dc7f1ee77a23d61b9c1639e83814333cb
   );
 };
 

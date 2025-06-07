@@ -63,6 +63,7 @@ const Chatbot = () => {
     powerBanks: "Power banks are essential for charging your devices on the go. Choose one with enough capacity (mAh) to keep your phone or tablet charged throughout the day.But are to be added soon ! Stay tuned.",
   };
 
+<<<<<<< HEAD
   // const handleSend = async () => {
   //   if (!input.trim()) return;
 
@@ -107,12 +108,30 @@ const Chatbot = () => {
   
     setTimeout(() => {
       // Check patterns and assign appropriate response to botResponse
+=======
+  const handleSend = async () => {
+    if (!input.trim()) return;
+
+    setMessages((prevMessages) => [...prevMessages, { sender: "user", text: input }]);
+    setLoading(true);
+
+    setTimeout(() => {
+      let botResponse = "Sorry, I don't have knowledge about that. Please ask about tech products like phones, laptops,tablets,desktop,speakers,microphone or even anything else techy you may want to know about. ";
+
+     
+      const patterns = Object.keys(productKnowledge).map((key) => ({
+        regex: new RegExp(`(.*)(${key})(.*)`, "i"),
+        response: productKnowledge[key],
+      }));
+
+>>>>>>> 0e775e5dc7f1ee77a23d61b9c1639e83814333cb
       for (const pattern of patterns) {
         if (pattern.regex.test(input)) {
           botResponse = pattern.response;
           break;
         }
       }
+<<<<<<< HEAD
   
       setMessages((prevMessages) => [...prevMessages, { sender: "bot", text: botResponse }]);
       setInput("");
@@ -123,6 +142,15 @@ const Chatbot = () => {
     }, 1000);
   };
   
+=======
+
+      setMessages((prevMessages) => [...prevMessages, { sender: "bot", text: botResponse }]);
+      setInput("");
+      setLoading(false);
+    }, 1000); 
+    speakText(botResponse);
+  };
+>>>>>>> 0e775e5dc7f1ee77a23d61b9c1639e83814333cb
 
   return (
     
